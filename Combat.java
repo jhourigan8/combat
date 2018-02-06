@@ -1,56 +1,101 @@
-package combatGame;
-
-class Combat{
-
-boolean playing = true;
-int moveVal = 0;
+import java.util.*;
+import java.io.FileReader;
 
 class Game{
 	int diff;
    public Game(int diff) {
 	   this.diff = diff;
    }
-   public void runGame(){
-      Weapon startSword = new Weapon("Rustic Blade", "An old iron sword", 8, 0, 5);
-      Fighter player = new Fighter("Dopey", startSword, 3, 30, 2);
-      Weapon orcAxe = new Weapon("Orc Axe", "xx", 12, 5, 10);
-      Fighter orc = new Fighter("Evil Orc", orcAxe, 6, 40, 5);
-      
-      while(playing == true){
-    	  System.out.println("a great orc approaches!");
-         if(moveVal >= 0){
-            //player move
-         }else{
-            //opponent move
-         }
-      }
+   
+   public void playerMove(Fighter player, Fighter orc){
+      System.out.println("attack - attacks using weapon");
+      System.out.println("block - blocks with shield");
+      Scanner scan = new Scanner(System.in);
+      boolean validMove = false;
+      while(validMove == false){
+         switch(scan.next()){
+            case "attack":
+               int damageDealt = player.weapon.damage + player.str;
+               orc.hp = orc.hp - damageDealt;
+               System.out.println(player.name + " dealt " + damageDealt + " damage to " + orc.name);
+               validMove = true;
+               break;
+            case "block":
+               System.out.println("atkL");
+               break;
+            default:
+               System.out.println("Enter a valid command.");
+         }     
+      }  
+   } 
+   
+   public void enemyMove(Fighter orc, Fighter player){
+      int damageDealt = orc.str + orc.weapon.damage;
+      player.hp -= damageDealt;
+      System.out.println(orc.name + " dealt " + damageDealt + " damage to " + player.name);
       
    }
-}
+   
+   
+   public Weapon[] readWeapons(){
+      FileReader reader = new FileReader("items.txt");
+      BufferedReader bReader = new BufferedReader(reader); 
+      String line = null; 
+      while((line = bReader.readLine()) != null){
+         System.out.println(line);
+      }
+   }
+   
+   public void runGame(){
+      Weapon startSword = new Weapon("Rustic Blade", 8, 0);
+      Fighter player = new Fighter("Dopey", startSword, 3, 30);
+      Weapon orcAxe = new Weapon("Orc Axe", 12, 5);
+      Fighter orc = new Fighter("Evil Orc", orcAxe, 6, 40);
 
+      //fight
+      //repeats until winner
+      while (true){
+         //player chooses action
+         this.playerMove(player, orc);
+          
+         if(orc.hp <= 0){
+            System.out.println("You are victorious!");
+            break;
+            }
+        
+         //wnwmy acts
+         this.enemyMove(orc, player);
+         
+         if(player.hp <= 0){
+            System.out.println("You have been defeated.");
+            break;
+         }
+      } 
+   }
+}
+   
+   /* 
+   swing jab parry block dodge
+   */
+   
 class Fighter{
    String name;
    int str;
    int hp;
-   int dex;
    
    Weapon weapon;
-   public Fighter(String name, Weapon weapon, int str, int hp, int dex){
-   this.name = name;
-   this.weapon = weapon;
-   this.str = str;
-   this.hp = hp;
-   this.dex = dex;
+   public Fighter(String name, Weapon weapon, int str, int hp){
+      this.name = name;
+      this.weapon = weapon;
+      this.str = str;
+      this.hp = hp;
    }
 }
 
 class Weapon extends Item{
-   public Weapon(String name, String description, int damage, int value, int useTime){
-   this.name = name;
-   this.description = description;
-   this.damage = damage;
-   this.value = value;
-   this.useTime = useTime;
+   public Weapon(String name, int damage, int value){
+      this.damage = damage;
+      this.value = value;
    }
    int damage;
    int value;
@@ -59,13 +104,15 @@ class Weapon extends Item{
 
 class Item{
    String name;
-   String description;
    int weight;
 }
 
-public static void main(String args[]){
-   Game game = new Game();
-   game.runGame();
-}
-
+class Combat{
+  
+   public static void main(String args[]){
+      Game game = new Game(1);
+      game.runGame();
+   }
+   
+   
 }
