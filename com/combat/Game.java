@@ -8,8 +8,31 @@ class Game{
    public Game(int diff) {
 	   this.diff = diff;
    }
-   
    public void playerMove(Fighter player, Fighter orc){
+      System.out.println("You are fighting an evil orc!"
+      + "\n             (    )"
+      + "\n            ((((()))"
+      + "\n            |o\\ /o)|"
+      + "\n            ( (  _')"
+      + "\n             (._.  /\\__"
+      + "\n            ,\\___,/ '  ')"
+      + "\n '.,_,,       (  .- .   .    )"
+      + "\n  \\   \\\\     ( '        )(    )"
+      + "\n   \\   \\\\    \\.  _.__ ____( .  |"
+      + "\n    \\  /\\\\   .(   .'  /\\  '.  )"
+      + "\n     \\(  \\.-' ( /    \\/    \\)"
+      + "\n      '  ()) _'.-|/\\/\\/\\/\\/\\|"
+      + "\n           '\\ .( |\\/\\/\\/\\/\\/|"
+      + "\n            '((  \\    /\\    /"
+      + "\n            ((((  '.__\\/__.')"
+      + "\n             ((,) /   ((()   )"
+      + "\n              \"..-,  (()(\"   /"
+      + "\n               _//.   ((() .'"
+      + "\n       _____ //,/' ___ ((( ', ___"
+      + "\n                        ((  )"
+      + "\n                        / /"
+      + "\n                      _/,/'"
+      + "\n                     /,/,'");
       System.out.println("attack - attacks using weapon");
       System.out.println("block - blocks with shield");
       Scanner scan = new Scanner(System.in);
@@ -23,7 +46,7 @@ class Game{
                validMove = true;
                break;
             case "block":
-               System.out.println("atkL");
+               System.out.println("You blocked his attack");
                break;
             default:
                System.out.println("Enter a valid command.");
@@ -66,9 +89,9 @@ class Game{
    
    public void runGame(){
       Weapon startSword = new Weapon("Rustic Blade", 8, 0);
-      Fighter player = new Fighter("Dopey", startSword, 3, 30);
+      Fighter player = new Fighter("Dopey", startSword, 3, 30, 0);
       Weapon orcAxe = new Weapon("Orc Axe", 12, 5);
-      Fighter orc = new Fighter("Evil Orc", orcAxe, 6, 40);
+      Fighter orc = new Fighter("Evil Orc", orcAxe, 6, 40, 100);
 
       //fight
       //repeats until winner
@@ -78,10 +101,11 @@ class Game{
           
          if(orc.hp <= 0){
             System.out.println("You are victorious!");
+            player.money = player.money + orc.money;
             break;
             }
         
-         //wnwmy acts
+         //enemy acts
          this.enemyMove(orc, player);
          
          if(player.hp <= 0){
@@ -94,3 +118,16 @@ class Game{
    /* 
    swing jab parry block dodge
    */
+/*
+                           ___
+                          ( ((
+                           ) ))
+  .::.                    / /(
+ 'M .-;-.-.-.-.-.-.-.-.-/| ((::::::::::::::::::::::::::::::::::::::::::::::.._
+(J ( ( ( ( ( ( ( ( ( ( ( |  ))   -====================================-      _.>
+ `P `-;-`-`-`-`-`-`-`-`-\| ((::::::::::::::::::::::::::::::::::::::::::::::''
+  `::'                    \ \(
+                           ) ))
+                          (_(( 
+                          combat!
+*/
