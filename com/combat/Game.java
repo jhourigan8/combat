@@ -1,8 +1,7 @@
 package com.combat;
 
 import java.util.*;
-import java.io.FileReader;
-import java.io.BufferedReader;
+import java.io.*;
 
 class Game{
 	int diff;
@@ -63,14 +62,30 @@ class Game{
    }
    
    
-//    public Weapon[] readWeapons(){
-//       FileReader reader = new FileReader("items.txt");
-//       BufferedReader bReader = new BufferedReader(reader); 
-//       String line = null; 
-//       while((line = bReader.readLine()) != null){
-//          System.out.println(line);
-//       }
-//    }
+   public Weapon[] readWeapons() throws FileNotFoundException{
+      Weapon weaponArray[] = new Weapon[2];
+      int weaponNum = 0;
+      FileReader reader = new FileReader("items.txt");
+      BufferedReader bReader = new BufferedReader(reader); 
+      String line = null; 
+      //read new line as new item
+      try{
+      while((line = bReader.readLine()) != null){
+         //seperate values into different variables
+         String[] details = line.split(",");
+         String itemType = details[0];
+         String name = details[1];
+         int damage = Integer.parseInt(details[2]);
+         int value = Integer.parseInt(details[3]);
+         Weapon x = new Weapon(name, damage, value);
+         weaponArray[weaponNum] = x;
+         weaponNum++;
+      }
+      }catch(Exception e){
+      System.out.println("error!" + e.toString());
+      }
+      return weaponArray;
+   }
    
    public void runGame(){
       Weapon startSword = new Weapon("Rustic Blade", 8, 0);

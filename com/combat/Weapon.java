@@ -6,4 +6,9 @@ class Weapon extends Item{
    }
    int damage;
    int value;
+
+   public String toString(){
+      return this.name;
+   }
+
 }
