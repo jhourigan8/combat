@@ -6,5 +6,4 @@ class Weapon extends Item{
    }
    int damage;
    int value;
-   int useTime;
 }
