@@ -1,2 +1,19 @@
-Weapon,Rusty Sword,10,20
-Weapon,Club,6,3
+Weapon,Quick Dagger,0,250,15
+Weapon,Black Dagger,0,500,35
+Weapon,Crystal Dagger,0,1000,60
+
+Weapon,Rust Blade,1,150,20
+Weapon,Iron Blade,1,350,35
+Weapon,Steel Blade,1,600,60
+Weapon,Cursed Blade,1,1500,90
+
+Weapon,Oak Club,2,150,30
+Weapon,Granite Club,2,400,50
+Weapon,Ancient Club,2,850,100
+
+Shield,Wooden Shield,200,5
+Shield,Wooden Longshield,400,10
+Shield,Reinforced Shield,500,15
+Shield,Iron Gate,750,25
+Shield,Steel Longshield,850,35
+Shield,Elder Forcefield,1200,50
